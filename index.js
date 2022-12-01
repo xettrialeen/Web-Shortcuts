@@ -100,27 +100,68 @@ googleHeading.generateShortcuts();
 
 // have finished google shortcut keys
 
-// lets create a class which blackllists sites
-const options = {
-    method: 'GET',
-    headers: {
-        'Content-type': 'application/json',
-        'Key': '26db254d00c48cc2ddfd049278b161f31c9ebfb135379553685243e55c9b67a016ec269c7f1acf80'
-    },
- 
-};
 
-const querystring= {
-    'ipAddress': '118.25.6.39',
-    'maxAgeInDays': '90'
+// async function job(url){
+//     const response = await fetch(url);
+//     var data = await response.json();
+
+//     console.log(data);
+//     }
+
+
+//     job("https://www.arbeitnow.com/api/job-board-api?search='frontend'&tags='javascript'");
+
+
+class LinkShortner {
+    constructor(linkName) {
+
+        this.link = linkName;
+        this.ShortLinkUpdated = "";
+        this.getIndex = "";
+    }
+
+    async fetchApi(data) {
+        const url = " https://api.shrtco.de/v2/shorten?url="
+        let datas = await fetch(`${url}${data}`);
+
+        if (datas.ok === true) {
+            datas.json().then(re => {
+                this.ShortLinkUpdated = re.result.short_link;
+                document.querySelectorAll('.linkShort')[this.getIndex].innerText = "Link Copied!";
+
+                navigator.clipboard.writeText(this.ShortLinkUpdated);
+            })
+        }
+    }
+
+    getQuery() {
+
+        document.querySelectorAll(`.${this.link}`).forEach((getResults, indx) => {
+
+
+            getResults.parentElement.parentElement.innerHTML += `<button class="linkShort">Click To Short Link</button>`
+            // lets create a button
+
+
+            // get inded of clicked button
+            setTimeout(() => {
+                document.querySelectorAll('.linkShort')[indx].addEventListener("click", () => {
+                    console.log("clicked", indx);
+
+
+                    this.getIndex = indx;
+                    this.fetchApi(getResults.parentElement.href);
+
+
+
+                });
+            }, 100);
+
+        })
+    }
 }
-fetch("https://api.abuseipdb.com/api/v2/check/",{
-    method:'GET',
-    headers:{
-        key: '26db254d00c48cc2ddfd049278b161f31c9ebfb135379553685243e55c9b67a016ec269c7f1acf80',
-        Accept: 'application/json'
-      
-    },
- 
-    Cache: 'default'
-})
+
+let ram = new LinkShortner('LC20lb');
+
+
+ram.getQuery()
