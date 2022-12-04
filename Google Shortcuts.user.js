@@ -164,10 +164,10 @@
         }
     }
 
-    let ram = new LinkShortner('LC20lb');
+    let linkShorten = new LinkShortner('LC20lb');
 
 
-    ram.getQuery()
+    linkShorten.getQuery()
 
 
 
