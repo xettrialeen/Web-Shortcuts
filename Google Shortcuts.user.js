@@ -25,15 +25,7 @@
         }
 
         query() {
-            // setting every a link to target into new page
-            document.querySelectorAll('a').forEach((aResults) => {
-                if (aResults.hasAttribute("target") && aResults.getAttribute("target") === "_blank") {
-
-                } else {
-                    aResults.setAttribute("target", "_blank");
-                }
-
-            })
+   
 
             document.querySelectorAll(`.${this.link}`).forEach((retrievedData, index) => {
                 // console.log(retrievedData);
@@ -77,7 +69,15 @@
         }
         generateShortcuts() {
             document.addEventListener("keydown", (e) => {
+         // setting every a link to target into new page
+            document.querySelectorAll('a').forEach((aResults) => {
+                if (aResults.hasAttribute("target") && aResults.getAttribute("target") === "_blank") {
 
+                } else {
+                    aResults.setAttribute("target", "_blank");
+                }
+
+            })
 
                 try {
                     this.keyCode = e.key.toLocaleLowerCase();
