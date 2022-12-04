@@ -101,17 +101,6 @@ googleHeading.generateShortcuts();
 // have finished google shortcut keys
 
 
-// async function job(url){
-//     const response = await fetch(url);
-//     var data = await response.json();
-
-//     console.log(data);
-//     }
-
-
-//     job("https://www.arbeitnow.com/api/job-board-api?search='frontend'&tags='javascript'");
-
-
 class LinkShortner {
     constructor(linkName) {
 
@@ -161,7 +150,6 @@ class LinkShortner {
     }
 }
 
-let ram = new LinkShortner('LC20lb');
+let shortify = new LinkShortner('LC20lb');
+shortify.getQuery();
 
-
-ram.getQuery()
